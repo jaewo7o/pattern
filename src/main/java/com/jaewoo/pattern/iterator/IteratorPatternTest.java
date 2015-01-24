@@ -1,19 +1,24 @@
 package com.jaewoo.pattern.iterator;
 
+import org.apache.log4j.Logger;
+
 public class IteratorPatternTest {
+	private static Logger LOG = Logger.getLogger(IteratorPatternTest.class);
+	
 	public static void main(String[] args) {
         ChannelCollection channels = populateChannels();
         ChannelIterator baseIterator = channels.iterator(ChannelTypeEnum.ALL);
         while (baseIterator.hasNext()) {
             Channel c = baseIterator.next();
-            System.out.println(c.toString());
+            LOG.debug(c.toString());
         }
-        System.out.println("******");
+        
+        LOG.debug("******");
         // Channel Type Iterator
         ChannelIterator englishIterator = channels.iterator(ChannelTypeEnum.ENGLISH);
         while (englishIterator.hasNext()) {
             Channel c = englishIterator.next();
-            System.out.println(c.toString());
+            LOG.debug(c.toString());
         }
     }
  
