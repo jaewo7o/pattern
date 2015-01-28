@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $("#btnExecute").click(function() {
+	    	retinaMacbook.insertUSB("myUSB");
+	    	//retinaMacbook.addRAM(3);
+	    	//console.log(retinaMacbook.RAM);
+	    	//console.log(retinaMacbook.USB);
+	    	
+	    	$("#result").text("RAM : " + retinaMacbook.getRAM() + "MB, USB : " + retinaMacbook.USB);
+	    });
+	});
+	
+	
+	var retinaMacbook = (function() {
+		//Private variables
+		var RAM, addRAM;
+		RAM = 4;
+
+		//Private method
+		addRAM = function(additionalRAM) {
+			RAM += additionalRAM;
+		};
+
+		return {
+			//Public variables and methods
+			USB : undefined,
+			insertUSB : function(device) {
+				this.USB = device;
+			},
+			removeUSB : function() {
+				var device = this.USB;
+				this.USB = undefined;
+				return device;
+			},
+			getRAM : function() {
+				return RAM;
+			}
+		};
+	})();
+</script>
+</head>
+<body>
+    <input id="btnExecute" type="button" value="input">
+    <span id="result"></span>
+</body>
+</html>
