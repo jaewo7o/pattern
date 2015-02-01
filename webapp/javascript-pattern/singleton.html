@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+    <script type="text/javascript">
+		 // 싱글톤을 생성해주는 모듈 객체. 
+		 // 익명 함수 실행 결과를 받습니다.
+		 var SingletonTester = (function(){
+		     // 실제 싱글톤 적용 객체
+		     function Singleton(args) {
+		         
+		         // 내부 작업...
+		         var args = args || {};
+		         this.a = args.a;
+		         this.b = args.b;  
+		     }
+		
+		     // 인스턴스 객체. 
+		     // 다수의 객체 생성을 제한하는 역할입니다
+		     var _instance;
+		
+		     // 외부에 공개될 객체를 반환합니다.
+		     // 모듈 패턴(Module Pattern)이라고 부릅니다
+		     return {        
+		         getInstance: function ( args ){
+		             if (_instance === undefined) {
+		            	 _instance = new Singleton( args );
+		             }
+		             return _instance;
+		         }
+		     };
+		     
+		 })(); // () 연산자로 선언과 동시에 바로 실행.
+		
+		 function execute() {
+			 // 테스트
+			 // 한번생성된 객체가 재 생성후에도 반환됨
+			 var singletonTest1 = SingletonTester.getInstance( { a: "hello" } );
+			 alert(singletonTest1.a);
+			 var singletonTest2 = SingletonTester.getInstance( { a: "hello2" } );
+			 alert(singletonTest2.a);
+		 }
+    </script>
+</head>
+<body>
+    <input type="button" name="execute" onclick="execute()" value="실행">
+</body>
+</html>
