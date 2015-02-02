@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function mySandwich(param1, param2, callback) {
+		alert('Started eating my sandwich.\n\nIt has: ' + param1 + ', '	+ param2);
+		if (callback && typeof (callback) === "function") {
+			callback(param1, param2);
+		}
+	}
+	
+	function _callbackTest(food1, food2) {
+		alert("food plus : " + food1 + ", " + food2);
+	}
+
+	function execute() {
+		mySandwich('ham', 'cheese', 'vegetables');
+		mySandwich('ham1', 'cheese2', _callbackTest);
+	}
+</script>
+</head>
+<body>
+    <input type="button" value="execute" onclick="execute()" />
+</body>
+</html>
