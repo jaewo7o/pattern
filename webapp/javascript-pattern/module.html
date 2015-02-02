@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+	// CASE1 : Basic Module Pattern
+	CalcModule1 = (function() {
+		var pub = {};
+
+		pub.add = function(a, b) {
+			console.log('in add()', a, b);
+			return a + b;
+		};
+
+		pub.sub = function(a, b) {
+			console.log('in sub()', a, b);
+			return a - b;
+		};
+
+		return pub;
+	})();
+
+	// CASE2 : Adding private members to Module
+	CalcModule2 = (function() {
+		var pub = {};
+		var mem = new Array(); //private variable
+
+		var storeInMemory = function(val) { //private function
+			mem.push(val);
+		};
+
+		pub.add = function(a, b) {
+			var result = a + b;
+			console.log('in add()', a, b);
+			storeInMemory(result); //call to private function
+			return result;
+		};
+
+		pub.sub = function(a, b) {
+			var result = a - b;
+			console.log('in sub()', a, b);
+			storeInMemory(result); //call to private function
+			return result;
+		};
+
+		pub.retrieveFromMemory = function() {
+			return mem.pop();
+		};
+
+		return pub;
+	})();
+
+	// CASE3 : Importing Parameters in JavaScript Module
+	CalcModule3 = (function($) {
+		var pub = {};
+		var INVALID = 'invalid input';
+		pub.add = function(a, b) {
+			console.log('in add()', a, b);
+			if ($.isNumeric(a) && $.isNumeric(b)) {
+				return a + b;
+			} else {
+				return INVALID;
+			}
+		};
+
+		pub.sub = function(a, b) {
+			console.log('in sub()', a, b);			
+			if ($.isNumeric(a) && $.isNumeric(b)) {
+				return a - b;
+			} else {
+				return INVALID;
+			}
+		};
+
+		return pub;
+	})(jQuery); //passed 'jQuery' global variable into local parameter '$'
+	
+	// CASE4 : Revealing Module Pattern
+	CalcModule4 = (function() {
+		var mem = new Array(); //private variable
+
+		var storeInMemory = function(val) { //private function
+			mem.push(val);
+		};
+
+		var add = function(a, b) {
+			var result = a + b;
+			storeInMemory(result); //call to private function
+			return result;
+		};
+
+		var sub = function(a, b) {
+			var result = a - b;
+			storeInMemory(result); //call to private function
+			return result;
+		};
+
+		var retrieveFromMemory = function() {
+			return mem.pop();
+		};
+
+		return {
+			add : add,
+			sub : sub,
+			popMemory : retrieveFromMemory
+		};
+	})();
+
+	function test1() {
+		console.log("Case1 =======================> ");
+		console.log("result : " + CalcModule1.add(5, 2));
+		console.log("result : " + CalcModule1.sub(5, 2));
+		console.log("Case2 =======================> ");
+		CalcModule2.add(2, 10);
+		CalcModule2.add(5, 15);
+		console.log("result : " + CalcModule2.retrieveFromMemory()); //outputs 20
+		console.log("result : " + CalcModule2.retrieveFromMemory()); //outputs 12
+		console.log("Case3 =======================> ");
+		console.log("result : " + CalcModule3.add(5, 2));
+		console.log("result : " + CalcModule3.sub(5, 2));
+		console.log("Case4 =======================> ");
+        CalcModule4.add(2, 10);
+        CalcModule4.add(5, 15);
+        console.log("result : " + CalcModule4.popMemory()); //outputs 20
+        console.log("result : " + CalcModule4.popMemory()); //outputs 12		
+	}
+</script>
+</head>
+<body>
+    <input type="button" onclick="test1()" value="execute" />
+</body>
+</html>
