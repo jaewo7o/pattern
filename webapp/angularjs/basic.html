@@ -5,12 +5,27 @@
     src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 </head>
 <body>
-    <div ng-app="">
+    <div ng-app="" ng-init="name='jaewoo'" ng-controller="personController">
         <p>Input something in the input box:</p>
         <p>
             Name: <input type="text" ng-model="name" value="John">
         </p>
         <p ng-bind="name"></p>
+
+        <!-- AngularJS Expressions -->
+        <p>My First Expression : {{ 10 + 2 }}</p>
+
+        <!-- AngularJS Controllers -->
+        First Name: <input type="text" ng-model="firstName"><br>
+        Last Name: <input type="text" ng-model="lastName"><br>
+        <br> Full Name: {{firstName + " " + lastName}}
     </div>
+
+    <script>
+        function personController($scope) {
+        	$scope.firstName = "John";
+        	$scope.lastName = "Doe";
+        }
+    </script>
 </body>
 </html>
