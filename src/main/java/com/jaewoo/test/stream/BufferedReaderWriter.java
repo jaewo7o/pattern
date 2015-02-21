@@ -21,12 +21,12 @@ public class BufferedReaderWriter {
 		try {
 			// "ReadFile.txt" 파일을 읽는 FileReader 객체 생성
 			// BufferedReader 객체 생성
-			fr = new FileReader("ReadFile.txt");
+			fr = new FileReader("src/main/resources/ReadFile.txt");
 			br = new BufferedReader(fr);
 
 			// FileWriter로 파일 "CopyFile.txt"에 출력한다. 기존 파일에 덮어쓴다.
 			// BufferedWriter 객체 생성
-			fw = new FileWriter("CopyFile.txt", false);
+			fw = new FileWriter("src/main/resources/CopyFile.txt", false);
 			bw = new BufferedWriter(fw);
 
 			String s = null;
