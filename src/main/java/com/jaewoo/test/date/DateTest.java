@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DateTest {
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException {	
 		Date currentDate = new Date();
 		System.out.println("current Date : " + currentDate);
 		
@@ -17,7 +17,7 @@ public class DateTest {
 		
 		calendar.add(Calendar.DATE, 1);
 		System.out.println("next day : " + calendar.get(Calendar.DATE));
-		
+	
 		String strCurrentDate;
 		strCurrentDate = new SimpleDateFormat("yyyy-MM-dd").format(currentDate);
 		System.out.println("format string date : " + strCurrentDate);
